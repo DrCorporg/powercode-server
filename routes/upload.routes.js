@@ -17,7 +17,10 @@ router.post(
 
 // Error handling for multer
 router.use((err, req, res, next) => {
-  if (err.message === "Only images allowed" || err instanceof multer.MulterError) {
+  if (
+    err.message === "Only images allowed" ||
+    err instanceof multer.MulterError
+  ) {
     return res.status(400).json({
       success: false,
       message: err.message || "File upload error",

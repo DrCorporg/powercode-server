@@ -37,7 +37,7 @@ pipeline {
             script {
                 def logUrl = "${env.BUILD_URL}consoleText"
                 slackSend(
-                    channel: '#tech-project-thimar',
+                    channel: '#tech-project-powercode',
                     message: "❌ *Build Failed*\nJob: ${env.JOB_NAME}\nBuild: #${env.BUILD_NUMBER}\n🔗 Full logs: ${env.BUILD_URL}console"
                 )
             }

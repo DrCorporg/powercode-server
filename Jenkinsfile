@@ -34,22 +34,11 @@ pipeline {
     }
     post {
         failure {
-                script {
-                int maxLines = 100
-                def logLines = currentBuild.rawBuild.getLog(maxLines)
-                def logSnippet = logLines.join("\n")
-
+            script {
+                def logUrl = "${env.BUILD_URL}consoleText"
                 slackSend(
-                    channel: '#tech-project-powercode',
-                    message: """
-                    ❌ *Build Failed*
-                    Job: ${env.JOB_NAME}
-                    Build: #${env.BUILD_NUMBER}
-                    
-                    📌 Last ${maxLines} lines:
-                    ${logSnippet}
-                    🔗 Full logs: ${env.BUILD_URL}console
-                    """
+                    channel: '#tech-project-thimar',
+                    message: "❌ *Build Failed*\nJob: ${env.JOB_NAME}\nBuild: #${env.BUILD_NUMBER}\n🔗 Full logs: ${env.BUILD_URL}console"
                 )
             }
         }

@@ -6,6 +6,11 @@ const contactSchema = new mongoose.Schema(
     email: String,
     phone: String,
     message: String,
+    category: {
+      type: String,
+      enum: ["support", "hr", "general", "partnerships"],
+      default: "general",
+    },
 
     status: {
       type: String,

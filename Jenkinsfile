@@ -15,9 +15,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                withCredentials([file(credentialsId: 'powercode-server.env', variable: 'ENV_FILE')]) {
+                withCredentials([file(credentialsId: 'powercode-backend.env', variable: 'ENV_FILE')]) {
                     sh 'cp $ENV_FILE .env'
-                    sh 'docker build -t ghcr.io/drcorporg/powercode-server:$BUILD_NUMBER .'
+                    sh 'docker build -t ghcr.io/drcorporg/powercode-backend:$BUILD_NUMBER .'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'USERNAME', passwordVariable: 'TOKEN')]) {
                     sh '''
                         echo $TOKEN | docker login ghcr.io -u $USERNAME --password-stdin
-                        docker push ghcr.io/drcorporg/powercode-server:${BUILD_NUMBER}
+                        docker push ghcr.io/drcorporg/powercode-backend:${BUILD_NUMBER}
                     '''
                 }
             }
